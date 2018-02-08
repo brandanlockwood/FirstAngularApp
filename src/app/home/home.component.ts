@@ -35,6 +35,19 @@ export class HomeComponent implements OnInit {
   btnText: string='search breed';
   goalText: string= 'labrador';
   goals = [];
+  successClass = "text-success"
+  hasError =true;
+  isSpecial = true;
+  messageClass= {
+    "text-special": this.isSpecial,
+    "text-danger": this.hasError,
+    "text-success": !this.hasError
+  }
+  count=0;
+  color="green";
+  show=false;
+  showCount=1;
+
 
 
   constructor(private _data: DataService) { }
@@ -48,7 +61,8 @@ export class HomeComponent implements OnInit {
 
 
   }
-  addItem(){
+  addItem(event){
+    console.log(event);
     this._data.search(this.goalText);
     //this.goals.push(this.goalText)
     this.goalText = '';
@@ -61,6 +75,35 @@ export class HomeComponent implements OnInit {
     this.goals.splice(i,1);
     this._data.changeGoal(this.goals)
      this.itemCount = this.goals.length;
+  }
+  changeOnClick()
+  {
+    this.count++;
+    if(this.count % 2 == 0)
+    {
+       this.hasError =true;
+       this.isSpecial = true;
+       this.color='green'
+    }
+    else {
+      this.hasError = false;
+      this.isSpecial = false;
+      this.color="blue"
+    }
+  }
+  showHidden(event)
+  {
+    console.log(event);
+    console.log(this.show);
+    this.show=true;
+        this.showCount++;
+    if(this.showCount % 2 == 0)
+    {
+    this.show=true;
+    }
+    else {
+    this.show=false;
+    }
   }
 
 }

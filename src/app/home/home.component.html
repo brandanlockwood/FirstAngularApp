@@ -6,17 +6,20 @@
      <!--one way data binding-->
     <p> Pictures ({{ itemCount }})</p>
   </div>
-  </div>
-  <div class="container color-light" [@goals]="goals.length">
+</div>
+
+<div class="container color-light" [@goals]="goals.length">
     <div class="col">
     <p class ="sm">Search for breed</p>
       <form>
         <!--Two way data  binding ngModel-->
         <input type="text" class="txt" name ="item" placeholder="Breed" [(ngModel)]="goalText">
         <br><span>{{goalText}}</span><!--Click event-->
-        <input type="submit" class="btn" [value]="btnText" (click)="addItem()">
+        <input type="submit" class="btn" [value]="btnText" (click)="addItem($event)">
+
+         <button (click)="showHidden($event)" >showHidden</button>
        </form>
-      </div>
+    </div>
     <div class="col">
       <!-- <p class="life-container" *ngFor="let goal of goals; let i = index" (click)="removeItem(i)">
         {{goal}}
@@ -26,6 +29,32 @@
       <img [src] ="goal" *ngFor="let goal of goals; let i = index" (click)="removeItem(i)"/>
 
 
+
     </div>
-  </div>
+
+    <div *ngIf="show; then showBlock;"></div>
+</div>
+<!--ngIf example-->
+    <ng-template #showBlock>
+    <div>
+      <!--class binding stuff-->
+
+      <p class="text-success">Practice </p>
+      <p [class]="successClass"> successClass</p>
+      <p class="text-special" [class]="successClass">success</p>
+      <p [class.text-danger]="hasError">Error</p>
+      <p [ngClass]="messageClass">Special</p>
+      <p [style.color] ="hasError ? 'red' : 'green'"(click)="changeOnClick()">Click me to change color of text above</p>
+    </div>
+    <div>
+      <!--ngSwitch-->
+      <div [ngSwitch]="color">
+        <div *ngSwitchCase="'red'">red has been chosen</div>
+        <div *ngSwitchCase="'green'">green has been chosen</div>
+        <div *ngSwitchCase="'blue'">blue has been chosen </div>
+      </div>
+    </div>
+
+</ng-template>
+
 
