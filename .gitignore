@@ -32,4 +32,4 @@
 node_modules/
 debug.log
 .idea
-src/package-lock.json
+package-lock.json
